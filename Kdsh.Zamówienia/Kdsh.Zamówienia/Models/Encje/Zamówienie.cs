@@ -21,9 +21,14 @@ namespace Kdsh.Zamówienia.Models.Encje
         public virtual Kolor Kolor { get; set; }
 
         [Required]
-        public virtual long? SklepId { get; set; }
+        public long? SklepId { get; set; }
 
         public virtual Sklep Sklep { get; set; }
+
+        [Required]
+        public long? StatusId { get; set; }
+
+        public virtual StatusZamówienia Status { get; set; }
 
         [Required]
         public long? ZasóbId { get; set; }

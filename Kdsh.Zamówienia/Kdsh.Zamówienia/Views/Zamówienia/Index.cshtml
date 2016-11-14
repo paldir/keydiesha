@@ -9,16 +9,29 @@
 <table>
     <thead>
         <tr>
+            <th>Status</th>
             <th>Id</th>
             <th>Data złożenia</th>
+            <th>Szczegóły</th>
+            <th>Odbiorca</th>
+            <th>Usuń</th>
         </tr>
     </thead>
     <tbody>
         @foreach (Zamówienie zamówienie in Model)
         {
             <tr>
+                <td>@zamówienie.Status.Nazwa</td>
                 <td>@zamówienie.Id</td>
                 <td>@zamówienie.DataZłożenia</td>
+                <td>@zamówienie.Zasób.Nazwa @zamówienie.Kolor.Nazwa.ToLower() x @zamówienie.Ilość</td>
+                <td>Sklep nr @zamówienie.SklepId</td>
+                <td>
+                    @if ((Session["admin"] != null) || (zamówienie.StatusId == 1))
+                    {
+                        @Html.ActionLink("X", "Usuń", new {id = zamówienie.Id})
+                    }
+                </td>
             </tr>
         }
     </tbody>

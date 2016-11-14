@@ -6,6 +6,7 @@ namespace Kdsh.Zamówienia.Models.Encje
     {
         public DbSet<Kolor> Kolory { get; set; }
         public DbSet<Sklep> Sklepy { get; set; }
+        public DbSet<StatusZamówienia> StatusyZamówień { get; set; }
         public DbSet<Zamówienie> Zamówienia { get; set; }
         public DbSet<Zasób> Zasoby { get; set; }
     }

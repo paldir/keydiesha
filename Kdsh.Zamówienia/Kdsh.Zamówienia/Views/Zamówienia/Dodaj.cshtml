@@ -5,6 +5,7 @@
     Layout = "~/Views/_Szablon.cshtml";
     Zamówienie zamówienie = Model.Zamówienie;
     IEnumerable<Zasób> zasoby = Model.Zasoby;
+    long? idSklepu = Session["idSklepu"] as long?;
 }
 
 @section head
@@ -17,10 +18,10 @@
             {
                 <text>var kolory = [];</text>
 
-                foreach (Kolor kolor in Model.ZasóbNaKolory[zasób])
+                foreach (Kolor kolor in zasób.Kolory)
                 {
                     <text>
-                        kolory.push([@kolor.Id, "@kolor.Nazwa"]);
+                        kolory.push([@kolor.Id, "@kolor.Nazwa.ToLower()"]);
                     </text>
                 }
 
@@ -29,10 +30,11 @@
                 </text>
             }
 
-            var kolor = document.getElementById("kolor");
+            var kolor = $('#kolor');
             var dostępneKolory = zasóbNaKolory[sender.value - 1];
+            var wybórKoloru = $("#wybórKoloru");
 
-            kolor.options.length = 0;
+            kolor.empty();
 
             for (var i = 0; i < dostępneKolory.length; i++) {
                 var aktualnyKolor = dostępneKolory[i];
@@ -40,7 +42,13 @@
                 opcja.value = aktualnyKolor[0];
                 opcja.text = aktualnyKolor[1];
 
-                kolor.add(opcja);
+                kolor.append(opcja);
+            }
+
+            if (dostępneKolory.length > 1) {
+                wybórKoloru.show();
+            } else {
+                wybórKoloru.hide();
             }
         }
     </script>
@@ -49,11 +57,11 @@
 <h2>Dodaj zamówienie</h2>
 @using (Html.BeginForm("Dodaj", "Zamówienia"))
 {
-    @Html.HiddenFor(m => zamówienie.SklepId, new {Value = Session["idSklepu"]})
+    @Html.HiddenFor(m => zamówienie.StatusId, new {Value = 1})
     <div>
         @Html.DropDownListFor(m => zamówienie.ZasóbId, zasoby.Select(z => new SelectListItem {Text = z.Nazwa, Value = z.Id.ToString()}), new {id = "zasób", onchange = "zasób_change(this)"})
     </div>
-    <div>
+    <div id="wybórKoloru">
         @Html.LabelFor(m => zamówienie.Kolor)
         @Html.DropDownListFor(m => zamówienie.KolorId, new SelectListItem[0], new {id = "kolor"})
     </div>
@@ -62,11 +70,20 @@
         @Html.TextBoxFor(m => zamówienie.Ilość, new {type = "number"})
         @Html.ValidationMessageFor(m => zamówienie.Ilość)
     </div>
+    if (idSklepu.HasValue)
+    {
+        @Html.HiddenFor(m => zamówienie.SklepId, new {Value = idSklepu})
+    }
+    else
+    {
+        <div>
+            @Html.LabelFor(m => zamówienie.Sklep)
+            @Html.DropDownListFor(m => zamówienie.SklepId, Model.Sklepy.Select(s => new SelectListItem {Text = s.Id.ToString(), Value = s.Id.ToString()}))
+        </div>
+    }
     <input type="submit" value="Dodaj zamówienie"/>
 }
 
 <script>
-    var zasób = document.getElementById("zasób");
-
-    zasób.onchange(this);
+    $("#zasób").change();
 </script>

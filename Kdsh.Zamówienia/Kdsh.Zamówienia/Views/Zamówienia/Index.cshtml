@@ -1,0 +1,25 @@
+﻿@using Kdsh.Zamówienia.Models.Encje
+@model IEnumerable<Zamówienie>
+@{
+    ViewBag.Title = "Zamówienia";
+    Layout = "~/Views/_Szablon.cshtml";
+}
+
+<h2>Zamówienia</h2>@Html.ActionLink("Dodaj zamówienie", "Dodaj")
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Data złożenia</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Zamówienie zamówienie in Model)
+        {
+            <tr>
+                <td>@zamówienie.Id</td>
+                <td>@zamówienie.DataZłożenia</td>
+            </tr>
+        }
+    </tbody>
+</table>

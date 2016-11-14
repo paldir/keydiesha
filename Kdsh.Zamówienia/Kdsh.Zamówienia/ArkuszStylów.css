@@ -1,0 +1,7 @@
+﻿input[type="number"] {
+    width: 50px;
+}
+
+label:after {
+    content: ": ";
+}

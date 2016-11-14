@@ -1,0 +1,14 @@
+﻿@model Kdsh.Zamówienia.Models.Widok.Sklepy.Index
+@{
+    ViewBag.Title = "Sklepy";
+    Layout = "~/Views/_Szablon.cshtml";
+}
+
+<h2>Sklepy</h2>
+@using (Html.BeginForm("Index", "Sklepy"))
+{
+    <div>
+        Sklep nr @Html.DropDownListFor(m => m.IdWybranegoSklepu, Model.Sklepy.Select(s => new SelectListItem { Text = s.Id.ToString(), Value = s.Id.ToString() }))
+        <input type="submit" value="Dalej" />
+    </div>
+}

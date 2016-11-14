@@ -1,0 +1,72 @@
+﻿@using Kdsh.Zamówienia.Models.Encje
+@model Kdsh.Zamówienia.Models.Widok.Zamówienia.Dodaj
+@{
+    ViewBag.Title = "Dodaj zamówienie";
+    Layout = "~/Views/_Szablon.cshtml";
+    Zamówienie zamówienie = Model.Zamówienie;
+    IEnumerable<Zasób> zasoby = Model.Zasoby;
+}
+
+@section head
+{
+    <script>
+        function zasób_change(sender) {
+            var zasóbNaKolory = [];
+
+            @foreach (Zasób zasób in zasoby)
+            {
+                <text>var kolory = [];</text>
+
+                foreach (Kolor kolor in Model.ZasóbNaKolory[zasób])
+                {
+                    <text>
+                        kolory.push([@kolor.Id, "@kolor.Nazwa"]);
+                    </text>
+                }
+
+                <text>
+                    zasóbNaKolory.push(kolory);
+                </text>
+            }
+
+            var kolor = document.getElementById("kolor");
+            var dostępneKolory = zasóbNaKolory[sender.value - 1];
+
+            kolor.options.length = 0;
+
+            for (var i = 0; i < dostępneKolory.length; i++) {
+                var aktualnyKolor = dostępneKolory[i];
+                var opcja = document.createElement("option");
+                opcja.value = aktualnyKolor[0];
+                opcja.text = aktualnyKolor[1];
+
+                kolor.add(opcja);
+            }
+        }
+    </script>
+}
+
+<h2>Dodaj zamówienie</h2>
+@using (Html.BeginForm("Dodaj", "Zamówienia"))
+{
+    @Html.HiddenFor(m => zamówienie.SklepId, new {Value = Session["idSklepu"]})
+    <div>
+        @Html.DropDownListFor(m => zamówienie.ZasóbId, zasoby.Select(z => new SelectListItem {Text = z.Nazwa, Value = z.Id.ToString()}), new {id = "zasób", onchange = "zasób_change(this)"})
+    </div>
+    <div>
+        @Html.LabelFor(m => zamówienie.Kolor)
+        @Html.DropDownListFor(m => zamówienie.KolorId, new SelectListItem[0], new {id = "kolor"})
+    </div>
+    <div>
+        @Html.LabelFor(m => zamówienie.Ilość)
+        @Html.TextBoxFor(m => zamówienie.Ilość, new {type = "number"})
+        @Html.ValidationMessageFor(m => zamówienie.Ilość)
+    </div>
+    <input type="submit" value="Dodaj zamówienie"/>
+}
+
+<script>
+    var zasób = document.getElementById("zasób");
+
+    zasób.onchange(this);
+</script>

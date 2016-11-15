@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Zamówienia";
     Layout = "~/Views/_Szablon.cshtml";
+    bool admin = Session["admin"] != null;
 }
 
 <h2>Zamówienia</h2>@Html.ActionLink("Dodaj zamówienie", "Dodaj")
@@ -14,7 +15,18 @@
             <th>Data złożenia</th>
             <th>Szczegóły</th>
             <th>Odbiorca</th>
-            <th>Usuń</th>
+            <th>Usuwanie</th>
+
+            <th>
+                @if (admin)
+                {
+                    <text>Zmiana statusu</text>
+                }
+                else
+                {
+                    <text>Potwierdzenie odbioru</text>
+                }
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -27,11 +39,20 @@
                 <td>@zamówienie.Zasób.Nazwa @zamówienie.Kolor.Nazwa.ToLower() x @zamówienie.Ilość</td>
                 <td>Sklep nr @zamówienie.SklepId</td>
                 <td>
-                    @if ((Session["admin"] != null) || (zamówienie.StatusId == 1))
+                    @if (admin || (zamówienie.StatusId == 1))
                     {
-                        @Html.ActionLink("X", "Usuń", new {id = zamówienie.Id})
+                        @Html.ActionLink("Usuń", "Usuń", new {id = zamówienie.Id})
                     }
                 </td>
+
+                @if (admin)
+                {
+                    <td>@Html.ActionLink("Zmień", "Status", new {id = zamówienie.Id})</td>
+                }
+                else if (zamówienie.StatusId == 2)
+                {
+                    <td>@Html.ActionLink("Potwierdź", "PotwierdźOdbiór", new {id = zamówienie.Id})</td>
+                }
             </tr>
         }
     </tbody>

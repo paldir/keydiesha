@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using Kdsh.Zamówienia.Models.Encje;
 using Kdsh.Zamówienia.Models.Widok.Sklepy;
@@ -27,7 +29,21 @@ namespace Kdsh.Zamówienia.Controllers
         [Route("Sklepy/{idSklepu:int}")]
         public ActionResult Wybierz(long idSklepu)
         {
-            Session["idSklepu"] = idSklepu;
+            const string idCiastka = "idSklepu";
+            HttpCookieCollection ciastkaOdpowiedzi = Response.Cookies;
+            HttpCookieCollection ciastkaŻądania = Request.Cookies;
+            DateTime dziś = DateTime.Now;
+
+            if (ciastkaŻądania[idCiastka] != null)
+            {
+                HttpCookie ciastkoUsuwające = new HttpCookie(idCiastka) {Expires = dziś.AddDays(-1)};
+
+                ciastkaOdpowiedzi.Add(ciastkoUsuwające);
+            }
+
+            HttpCookie ciastko = new HttpCookie(idCiastka, idSklepu.ToString()) {Expires = dziś.AddMonths(1)};
+
+            ciastkaOdpowiedzi.Add(ciastko);
 
             return RedirectToAction("Index", "Zamówienia");
         }

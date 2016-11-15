@@ -5,7 +5,10 @@
     Layout = "~/Views/_Szablon.cshtml";
     Zamówienie zamówienie = Model.Zamówienie;
     IEnumerable<Zasób> zasoby = Model.Zasoby;
-    long? idSklepu = Session["idSklepu"] as long?;
+    bool admin = Session["admin"] != null;
+    long idSklepu;
+
+    long.TryParse(Request.Cookies["idSklepu"]?.Value, out idSklepu);
 }
 
 @section head
@@ -70,18 +73,22 @@
         @Html.TextBoxFor(m => zamówienie.Ilość, new {type = "number"})
         @Html.ValidationMessageFor(m => zamówienie.Ilość)
     </div>
-    if (idSklepu.HasValue)
-    {
-        @Html.HiddenFor(m => zamówienie.SklepId, new {Value = idSklepu})
-    }
-    else
-    {
-        <div>
-            @Html.LabelFor(m => zamówienie.Sklep)
-            @Html.DropDownListFor(m => zamówienie.SklepId, Model.Sklepy.Select(s => new SelectListItem {Text = s.Id.ToString(), Value = s.Id.ToString()}))
-        </div>
-    }
-    <input type="submit" value="Dodaj zamówienie"/>
+    <div>
+        @Html.LabelFor(m => zamówienie.Sklep)
+        @Html.DropDownListFor(m => zamówienie.SklepId, Model.Sklepy.Select(s => new SelectListItem {Text = s.Id.ToString(), Value = s.Id.ToString()}), new {id = "sklep"})
+
+        @if (!admin)
+        {
+            @Html.HiddenFor(m => zamówienie.SklepId, new {Value = idSklepu})
+
+            <script>
+                $("#sklep").prop("disabled", true);
+                $("#sklep").val("@idSklepu").change();
+            </script>
+        }
+    </div>
+    <input value="Dodaj zamówienie" type="submit"/>
+    @Html.ActionLink("Anuluj", "Index")
 }
 
 <script>

@@ -1,0 +1,35 @@
+﻿@using Kdsh.Zamówienia.Models.Encje
+@model Kdsh.Zamówienia.Models.Widok.Zamówienia.Status
+@{
+    ViewBag.Title = "Status";
+    Layout = "~/Views/_Szablon.cshtml";
+    Zamówienie zamówienie = Model.Zamówienie;
+}
+
+<h2>Zmiana statusu</h2>
+@using (Html.BeginForm("Status", "Zamówienia"))
+{
+    @Html.HiddenFor(m => zamówienie.Id)
+    <div>
+        @Html.LabelFor(m => zamówienie.Status)
+        @Html.DropDownListFor(m => zamówienie.StatusId, Model.Statusy.Select(s => new SelectListItem {Text = s.Nazwa, Value = s.Id.ToString()}))
+    </div>
+    <div>
+        @Html.LabelFor(m => zamówienie.Id)
+        @zamówienie.Id
+    </div>
+    <div>
+        @Html.LabelFor(m => zamówienie.DataZłożenia)
+        @zamówienie.DataZłożenia
+    </div>
+    <div>
+        <label>Szczegóły</label>
+        @zamówienie.Zasób.Nazwa @zamówienie.Kolor.Nazwa.ToLower() x @zamówienie.Ilość
+    </div>
+    <div>
+        @Html.LabelFor(m => zamówienie.Sklep)
+        @zamówienie.SklepId
+    </div>
+    <input value="Potwierdź" type="submit"/>
+    @Html.ActionLink("Anuluj", "Index")
+}

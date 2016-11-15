@@ -1,12 +1,25 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string nrSklepu = Request.Cookies["idSklepu"]?.Value;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <link href="~/ArkuszStylów.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.1.1.js"></script>
     <title>Zamówienia KDSH</title>
-    @RenderSection("head", required: false)
+    @RenderSection("head", false)
 </head>
 <body>
+    @if (Session["admin"] == null)
+    {
+        @nrSklepu
+    }
+    else
+    {
+        <span>admin</span>
+    }
+
     @RenderBody()
 </body>
 </html>

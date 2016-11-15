@@ -10,6 +10,7 @@ namespace Kdsh.Zamówienia.Models.Encje
         [Key]
         public long Id { get; set; }
 
+        [Display(Name = "Data złożenia")]
         public DateTime DataZłożenia { get; set; }
 
         [Required]

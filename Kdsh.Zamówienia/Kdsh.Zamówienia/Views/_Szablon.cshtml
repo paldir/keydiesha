@@ -1,5 +1,7 @@
-﻿@{
+﻿@using Kdsh.Zamówienia.Models.Encje
+@{
     string nrSklepu = Request.Cookies["idSklepu"]?.Value;
+    Administrator admin = Session["admin"] as Administrator;
 }
 
 <!DOCTYPE html>
@@ -11,15 +13,22 @@
     @RenderSection("head", false)
 </head>
 <body>
-    @if (Session["admin"] == null)
-    {
-        @nrSklepu
-    }
-    else
-    {
-        <span>admin</span>
-    }
-
-    @RenderBody()
+    <span class="użytkownik">
+        @if (admin == null)
+        {
+            if (!string.IsNullOrEmpty(nrSklepu))
+            {
+                <span>Sklep nr @nrSklepu</span>
+            }
+        }
+        else
+        {
+            @admin.Nazwa<br />
+            @Html.ActionLink("Wyloguj", "Wyloguj", "Admin")
+        }
+    </span>
+    <div class="główneOkno">
+        @RenderBody()
+    </div>
 </body>
 </html>

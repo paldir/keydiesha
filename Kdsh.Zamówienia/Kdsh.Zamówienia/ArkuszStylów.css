@@ -1,7 +1,47 @@
-﻿input[type="number"] {
+﻿.główneOkno {
+    display: table;
+    margin: auto;
+}
+
+input, label, select, .wiersz {
+    margin: 5px;
+    padding: 3px;
+}
+
+input[type="number"] {
     width: 50px;
+}
+
+.field-validation-error, .validation-summary-errors {
+    color: red;
+}
+
+label {
+    font-weight: bold;
 }
 
 label:after {
     content: ": ";
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid lightgray;
+    padding: 5px;
+}
+
+.użytkownik {
+    position: absolute;
+    right: 10px;
+}
+
+.wycentrowanie {
+    text-align: center;
+}
+
+.wyrównanieDoPrawej {
+    text-align: right;
 }

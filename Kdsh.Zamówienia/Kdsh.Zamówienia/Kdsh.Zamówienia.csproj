@@ -115,6 +115,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Encje\Administrator.cs" />
     <Compile Include="Models\Encje\Kolor.cs" />
     <Compile Include="Models\Encje\Kontekst.cs" />
     <Compile Include="Models\Encje\Sklep.cs" />
@@ -137,6 +138,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
     <Content Include="Views\Zamówienia\Status.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

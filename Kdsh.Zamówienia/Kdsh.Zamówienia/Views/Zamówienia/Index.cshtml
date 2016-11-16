@@ -35,7 +35,7 @@
             <tr>
                 <td>@zamówienie.Status.Nazwa</td>
                 <td>@zamówienie.Id</td>
-                <td>@zamówienie.DataZłożenia</td>
+                <td>@Html.DisplayFor(m=>zamówienie.DataZłożenia)</td>
                 <td>@zamówienie.Zasób.Nazwa @zamówienie.Kolor.Nazwa.ToLower() x @zamówienie.Ilość</td>
                 <td>Sklep nr @zamówienie.SklepId</td>
                 <td>
@@ -45,14 +45,16 @@
                     }
                 </td>
 
-                @if (admin)
-                {
-                    <td>@Html.ActionLink("Zmień", "Status", new {id = zamówienie.Id})</td>
-                }
-                else if (zamówienie.StatusId == 2)
-                {
-                    <td>@Html.ActionLink("Potwierdź", "PotwierdźOdbiór", new {id = zamówienie.Id})</td>
-                }
+                <td>
+                    @if (admin)
+                    {
+                        @Html.ActionLink("Zmień", "Status", new {id = zamówienie.Id})
+                    }
+                    else if (zamówienie.StatusId == 2)
+                    {
+                        @Html.ActionLink("Potwierdź", "PotwierdźOdbiór", new {id = zamówienie.Id})
+                    }
+                </td>
             </tr>
         }
     </tbody>

@@ -11,8 +11,10 @@ namespace Kdsh.Zamówienia.Models.Encje
         public long Id { get; set; }
 
         [Display(Name = "Data złożenia")]
+        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy, HH:mm}")]
         public DateTime DataZłożenia { get; set; }
 
+        [Range(1, int.MaxValue, ErrorMessage = "Pole Ilość musi być większe od 0.")]
         [Required]
         public int Ilość { get; set; }
 

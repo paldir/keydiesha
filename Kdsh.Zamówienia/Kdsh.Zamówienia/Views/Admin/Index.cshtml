@@ -1,0 +1,15 @@
+﻿@model Kdsh.Zamówienia.Models.Encje.Administrator
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_Szablon.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Admin"))
+{
+    <div>
+        @Html.TextBoxFor(m => m.Nazwa, new {placeholder = "Nazwa użytkownika"})<br/>
+        @Html.PasswordFor(m => m.Hasło, new {placeholder = "Hasło"})<br/>
+        <input value="Logowanie" type="submit"/><br/>
+        @Html.ValidationSummary()
+    </div>
+}

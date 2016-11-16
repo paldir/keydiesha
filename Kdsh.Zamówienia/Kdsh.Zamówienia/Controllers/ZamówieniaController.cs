@@ -44,6 +44,8 @@ namespace Kdsh.Zamówienia.Controllers
 
         public ActionResult Index()
         {
+            throw new Exception("DISPLEJE");
+
             Zamówienie[] zamówienia;
             bool admin = Session["admin"] != null;
 

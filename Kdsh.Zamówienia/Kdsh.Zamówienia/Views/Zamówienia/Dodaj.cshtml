@@ -62,7 +62,8 @@
 {
     @Html.HiddenFor(m => zamówienie.StatusId, new {Value = 1})
     <div>
-        @Html.DropDownListFor(m => zamówienie.ZasóbId, zasoby.Select(z => new SelectListItem {Text = z.Nazwa, Value = z.Id.ToString()}), new {id = "zasób", onchange = "zasób_change(this)"})
+        <label>Artykuł</label>
+        @Html.DropDownListFor(m => zamówienie.ZasóbId, zasoby.Select(z => new SelectListItem {Text = z.Nazwa.ToLower(), Value = z.Id.ToString()}), new {id = "zasób", onchange = "zasób_change(this)"})
     </div>
     <div id="wybórKoloru">
         @Html.LabelFor(m => zamówienie.Kolor)

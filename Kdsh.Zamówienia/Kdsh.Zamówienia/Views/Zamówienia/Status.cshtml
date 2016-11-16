@@ -10,23 +10,23 @@
 @using (Html.BeginForm("Status", "Zamówienia"))
 {
     @Html.HiddenFor(m => zamówienie.Id)
-    <div>
+    <div class="wiersz">
         @Html.LabelFor(m => zamówienie.Status)
         @Html.DropDownListFor(m => zamówienie.StatusId, Model.Statusy.Select(s => new SelectListItem {Text = s.Nazwa, Value = s.Id.ToString()}))
     </div>
-    <div>
+    <div class="wiersz">
         @Html.LabelFor(m => zamówienie.Id)
         @zamówienie.Id
     </div>
-    <div>
+    <div class="wiersz">
         @Html.LabelFor(m => zamówienie.DataZłożenia)
         @zamówienie.DataZłożenia
     </div>
-    <div>
+    <div class="wiersz">
         <label>Szczegóły</label>
         @zamówienie.Zasób.Nazwa @zamówienie.Kolor.Nazwa.ToLower() x @zamówienie.Ilość
     </div>
-    <div>
+    <div class="wiersz">
         @Html.LabelFor(m => zamówienie.Sklep)
         @zamówienie.SklepId
     </div>

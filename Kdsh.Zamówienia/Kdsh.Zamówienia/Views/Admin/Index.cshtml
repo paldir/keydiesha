@@ -9,7 +9,7 @@
     <div>
         @Html.TextBoxFor(m => m.Nazwa, new {placeholder = "Nazwa użytkownika"})<br/>
         @Html.PasswordFor(m => m.Hasło, new {placeholder = "Hasło"})<br/>
-        <input value="Logowanie" type="submit"/><br/>
+        <input class="przyciskGranatowy" value="Logowanie" type="submit"/><br/>
         @Html.ValidationSummary()
     </div>
 }

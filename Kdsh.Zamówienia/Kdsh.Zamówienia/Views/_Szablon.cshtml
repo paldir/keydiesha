@@ -13,20 +13,23 @@
     @RenderSection("head", false)
 </head>
 <body>
-    <span class="użytkownik">
-        @if (admin == null)
-        {
-            if (!string.IsNullOrEmpty(nrSklepu))
+    <div class="menu">
+        <span class="użytkownik">
+            Zalogowany jako:
+            @if (admin == null)
             {
-                <span>Sklep nr @nrSklepu</span>
+                if (!string.IsNullOrEmpty(nrSklepu))
+                {
+                    <span>sklep nr <strong>@Html.DisplayFor(m => nrSklepu)</strong></span>
+                }
             }
-        }
-        else
-        {
-            @admin.Nazwa<br />
-            @Html.ActionLink("Wyloguj", "Wyloguj", "Admin")
-        }
-    </span>
+            else
+            {
+                <strong>@Html.DisplayFor(m => admin.Nazwa)</strong><text>, </text>
+                @Html.ActionLink("Wyloguj", "Wyloguj", "Admin", null, new {@class = "linkCiemny"})
+            }
+        </span>
+    </div>
     <div class="główneOkno">
         @RenderBody()
     </div>

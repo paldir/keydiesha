@@ -6,7 +6,8 @@
     bool admin = Session["admin"] != null;
 }
 
-<h2>Zamówienia</h2>@Html.ActionLink("Dodaj zamówienie", "Dodaj")
+<h2>Zamówienia</h2>
+<button class="przyciskGranatowy" onclick="location.href='@Url.Action("Dodaj")'" type="button">Dodaj zamówienie</button>
 <table>
     <thead>
         <tr>
@@ -16,7 +17,6 @@
             <th>Szczegóły</th>
             <th>Odbiorca</th>
             <th>Usuwanie</th>
-
             <th>
                 @if (admin)
                 {
@@ -33,18 +33,17 @@
         @foreach (Zamówienie zamówienie in Model)
         {
             <tr>
-                <td>@zamówienie.Status.Nazwa</td>
-                <td>@zamówienie.Id</td>
-                <td>@Html.DisplayFor(m=>zamówienie.DataZłożenia)</td>
-                <td>@zamówienie.Zasób.Nazwa @zamówienie.Kolor.Nazwa.ToLower() x @zamówienie.Ilość</td>
-                <td>Sklep nr @zamówienie.SklepId</td>
+                <td class="@((zamówienie.DataZłożenia.Date == DateTime.Now.Date) && (zamówienie.StatusId == 1) ? "nowe" : zamówienie.Status.Nazwa)">@Html.DisplayFor(m => zamówienie.Status.Nazwa)</td>
+                <td>@Html.DisplayFor(m => zamówienie.Id)</td>
+                <td>@Html.DisplayFor(m => zamówienie.DataZłożenia)</td>
+                <td>@Html.DisplayFor(m => zamówienie.Zasób.Nazwa) @(zamówienie.Zasób.Kolory.Count > 1 ? Html.DisplayFor(m => zamówienie.Kolor.Nazwa) : Html.Raw(string.Empty)) x @Html.DisplayFor(m => zamówienie.Ilość)</td>
+                <td>Sklep nr @Html.DisplayFor(m => zamówienie.SklepId)</td>
                 <td>
                     @if (admin || (zamówienie.StatusId == 1))
                     {
                         @Html.ActionLink("Usuń", "Usuń", new {id = zamówienie.Id})
                     }
                 </td>
-
                 <td>
                     @if (admin)
                     {

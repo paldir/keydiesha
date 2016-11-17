@@ -44,8 +44,6 @@ namespace Kdsh.Zamówienia.Controllers
 
         public ActionResult Index()
         {
-            throw new Exception("DISPLEJE");
-
             Zamówienie[] zamówienia;
             bool admin = Session["admin"] != null;
 
@@ -64,7 +62,7 @@ namespace Kdsh.Zamówienia.Controllers
                     zamówieniaPośrednie = zamówieniaPośrednie.Where(z => z.SklepId == idSklepu);
                 }
 
-                zamówienia = zamówieniaPośrednie.Include(z => z.Kolor).Include(z => z.Status).Include(z => z.Zasób).OrderBy(z => z.StatusId).ThenByDescending(z => z.DataZłożenia).ToArray();
+                zamówienia = zamówieniaPośrednie.Include(z => z.Kolor).Include(z => z.Status).Include(z => z.Zasób).Include(z => z.Zasób.Kolory).OrderBy(z => z.StatusId).ThenByDescending(z => z.DataZłożenia).ToArray();
             }
 
             return View(zamówienia);

@@ -9,6 +9,6 @@
 {
     <div>
         Sklep nr @Html.DropDownListFor(m => m.IdWybranegoSklepu, Model.Sklepy.Select(s => new SelectListItem { Text = s.Id.ToString(), Value = s.Id.ToString() }))
-        <input value="Dalej" type="submit" />
+        <input class="przyciskGranatowy" value="Dalej" type="submit" />
     </div>
 }

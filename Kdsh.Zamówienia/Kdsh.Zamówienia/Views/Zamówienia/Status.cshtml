@@ -16,20 +16,20 @@
     </div>
     <div class="wiersz">
         @Html.LabelFor(m => zamówienie.Id)
-        @zamówienie.Id
+        @Html.DisplayFor(m => zamówienie.Id)
     </div>
     <div class="wiersz">
         @Html.LabelFor(m => zamówienie.DataZłożenia)
-        @zamówienie.DataZłożenia
+        @Html.DisplayFor(m => zamówienie.DataZłożenia)
     </div>
     <div class="wiersz">
         <label>Szczegóły</label>
-        @zamówienie.Zasób.Nazwa @zamówienie.Kolor.Nazwa.ToLower() x @zamówienie.Ilość
+        @Html.DisplayFor(m => zamówienie.Zasób.Nazwa) @Html.DisplayFor(m => zamówienie.Kolor.Nazwa) x @Html.DisplayFor(m => zamówienie.Ilość)
     </div>
     <div class="wiersz">
         @Html.LabelFor(m => zamówienie.Sklep)
-        @zamówienie.SklepId
+        @Html.DisplayFor(m => zamówienie.SklepId)
     </div>
-    <input value="Potwierdź" type="submit"/>
-    @Html.ActionLink("Anuluj", "Index")
+    <input class="przyciskGranatowy" value="Potwierdź" type="submit"/>
+    <button class="przyciskBiały" onclick="location.href='@Url.Action("Index")'" type="button">Anuluj</button>
 }

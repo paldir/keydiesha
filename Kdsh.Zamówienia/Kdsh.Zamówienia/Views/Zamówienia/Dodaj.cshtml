@@ -88,8 +88,8 @@
             </script>
         }
     </div>
-    <input value="Dodaj zamówienie" type="submit"/>
-    @Html.ActionLink("Anuluj", "Index")
+    <input class="przyciskGranatowy" value="Dodaj zamówienie" type="submit"/>
+    <button class="przyciskBiały" onclick="location.href='@Url.Action("Index")'" type="button">Anuluj</button>
 }
 
 <script>

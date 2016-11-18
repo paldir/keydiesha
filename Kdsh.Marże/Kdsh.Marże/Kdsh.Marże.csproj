@@ -49,7 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Marże S-1 2016_wrzesień.xlsx">
+    <None Include="Marże S-9 2016_październik.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -83,7 +83,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="S1.txt">
+    <Content Include="S9.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

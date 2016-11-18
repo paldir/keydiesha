@@ -13,7 +13,7 @@ namespace Kdsh.Zamówienia.Controllers
         [HttpGet]
         public ActionResult Dodaj()
         {
-            Dodaj model = new Dodaj();
+            Dodaj model = new Dodaj {Zamówienie = {Ilość = 1}};
 
             UzupełnijModelDodawania(model);
 

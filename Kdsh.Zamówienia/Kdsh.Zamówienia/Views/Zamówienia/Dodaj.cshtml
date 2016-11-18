@@ -24,13 +24,13 @@
                 foreach (Kolor kolor in zasób.Kolory)
                 {
                     <text>
-                        kolory.push([@kolor.Id, "@kolor.Nazwa.ToLower()"]);
-                    </text>
+            kolory.push([@kolor.Id, "@kolor.Nazwa.ToLower()"]);
+            </text>
                 }
 
                 <text>
-                    zasóbNaKolory.push(kolory);
-                </text>
+            zasóbNaKolory.push(kolory);
+            </text>
             }
 
             var kolor = $('#kolor');
@@ -61,35 +61,43 @@
 @using (Html.BeginForm("Dodaj", "Zamówienia"))
 {
     @Html.HiddenFor(m => zamówienie.StatusId, new {Value = 1})
-    <div>
-        <label>Artykuł</label>
-        @Html.DropDownListFor(m => zamówienie.ZasóbId, zasoby.Select(z => new SelectListItem {Text = z.Nazwa.ToLower(), Value = z.Id.ToString()}), new {id = "zasób", onchange = "zasób_change(this)"})
-    </div>
-    <div id="wybórKoloru">
-        @Html.LabelFor(m => zamówienie.Kolor)
-        @Html.DropDownListFor(m => zamówienie.KolorId, new SelectListItem[0], new {id = "kolor"})
-    </div>
-    <div>
-        @Html.LabelFor(m => zamówienie.Ilość)
-        @Html.TextBoxFor(m => zamówienie.Ilość, new {type = "number"})
-        @Html.ValidationMessageFor(m => zamówienie.Ilość)
-    </div>
-    <div>
-        @Html.LabelFor(m => zamówienie.Sklep)
-        @Html.DropDownListFor(m => zamówienie.SklepId, Model.Sklepy.Select(s => new SelectListItem {Text = s.Id.ToString(), Value = s.Id.ToString()}), new {id = "sklep"})
+    <table>
+        <tr>
+            <td class="wyrównanieDoPrawej">
+                <label>Artykuł</label>
+            </td>
+            <td>@Html.DropDownListFor(m => zamówienie.ZasóbId, zasoby.Select(z => new SelectListItem {Text = z.Nazwa.ToLower(), Value = z.Id.ToString()}), new {id = "zasób", onchange = "zasób_change(this)"})</td>
+        </tr>
+        <tr id="wybórKoloru">
+            <td class="wyrównanieDoPrawej">@Html.LabelFor(m => zamówienie.Kolor)</td>
+            <td>@Html.DropDownListFor(m => zamówienie.KolorId, new SelectListItem[0], new {id = "kolor"})</td>
+        </tr>
+        <tr>
+            <td class="wyrównanieDoPrawej">@Html.LabelFor(m => zamówienie.Ilość)</td>
+            <td>
+                @Html.TextBoxFor(m => zamówienie.Ilość, new {type = "number"})
+                @Html.ValidationMessageFor(m => zamówienie.Ilość)
+            </td>
+        </tr>
+        <tr>
+            <td class="wyrównanieDoPrawej">@Html.LabelFor(m => zamówienie.Sklep)</td>
+            <td>
+                @Html.DropDownListFor(m => zamówienie.SklepId, Model.Sklepy.Select(s => new SelectListItem {Text = s.Id.ToString(), Value = s.Id.ToString()}), new {id = "sklep"})
 
-        @if (!admin)
-        {
-            @Html.HiddenFor(m => zamówienie.SklepId, new {Value = idSklepu})
+                @if (!admin)
+                {
+                    @Html.HiddenFor(m => zamówienie.SklepId, new {Value = idSklepu})
 
-            <script>
-                $("#sklep").prop("disabled", true);
-                $("#sklep").val("@idSklepu").change();
-            </script>
-        }
-    </div>
+                    <script>
+                        $("#sklep").prop("disabled", true);
+                        $("#sklep").val("@idSklepu").change();
+                    </script>
+                }
+            </td>
+        </tr>
+    </table>
     <input class="przyciskGranatowy" value="Dodaj zamówienie" type="submit"/>
-    <button class="przyciskBiały" onclick="location.href='@Url.Action("Index")'" type="button">Anuluj</button>
+    <button class="przyciskBiały" onclick="location.href = '@Url.Action("Index")'" type="button">Anuluj</button>
 }
 
 <script>

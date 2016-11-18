@@ -10,26 +10,28 @@
 @using (Html.BeginForm("Status", "Zamówienia"))
 {
     @Html.HiddenFor(m => zamówienie.Id)
-    <div class="wiersz">
-        @Html.LabelFor(m => zamówienie.Status)
-        @Html.DropDownListFor(m => zamówienie.StatusId, Model.Statusy.Select(s => new SelectListItem {Text = s.Nazwa, Value = s.Id.ToString()}))
-    </div>
-    <div class="wiersz">
-        @Html.LabelFor(m => zamówienie.Id)
-        @Html.DisplayFor(m => zamówienie.Id)
-    </div>
-    <div class="wiersz">
-        @Html.LabelFor(m => zamówienie.DataZłożenia)
-        @Html.DisplayFor(m => zamówienie.DataZłożenia)
-    </div>
-    <div class="wiersz">
-        <label>Szczegóły</label>
-        @Html.DisplayFor(m => zamówienie.Zasób.Nazwa) @Html.DisplayFor(m => zamówienie.Kolor.Nazwa) x @Html.DisplayFor(m => zamówienie.Ilość)
-    </div>
-    <div class="wiersz">
-        @Html.LabelFor(m => zamówienie.Sklep)
-        @Html.DisplayFor(m => zamówienie.SklepId)
-    </div>
+    <table>
+        <tr>
+            <td class="wyrównanieDoPrawej">@Html.LabelFor(m => zamówienie.Status)</td>
+            <td>@Html.DropDownListFor(m => zamówienie.StatusId, Model.Statusy.Select(s => new SelectListItem {Text = s.Nazwa, Value = s.Id.ToString()}))</td>
+        </tr>
+        <tr>
+            <td class="wyrównanieDoPrawej">@Html.LabelFor(m => zamówienie.Id)</td>
+            <td>@Html.DisplayFor(m => zamówienie.Id)</td>
+        </tr>
+        <tr>
+            <td class="wyrównanieDoPrawej">@Html.LabelFor(m => zamówienie.DataZłożenia)</td>
+            <td>@Html.DisplayFor(m => zamówienie.DataZłożenia)</td>
+        </tr>
+        <tr>
+            <td class="wyrównanieDoPrawej"><label>Szczegóły</label></td>
+            <td>@Html.DisplayFor(m => zamówienie.Zasób.Nazwa) @Html.DisplayFor(m => zamówienie.Kolor.Nazwa) x @Html.DisplayFor(m => zamówienie.Ilość)</td>
+        </tr>
+        <tr>
+            <td class="wyrównanieDoPrawej">@Html.LabelFor(m => zamówienie.Sklep)</td>
+            <td>@Html.DisplayFor(m => zamówienie.SklepId)</td>
+        </tr>
+    </table>
     <input class="przyciskGranatowy" value="Potwierdź" type="submit"/>
-    <button class="przyciskBiały" onclick="location.href='@Url.Action("Index")'" type="button">Anuluj</button>
+    <button class="przyciskBiały" onclick="location.href = '@Url.Action("Index")'" type="button">Anuluj</button>
 }

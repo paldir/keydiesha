@@ -18,13 +18,17 @@ body, html {
     padding: 0;
 }
 
-button, h2, input, label, select, table, .wiersz {
+button, h2, input, label, select, table {
     margin: 5px;
 }
 
 .główneOkno {
     display: table;
     margin: auto;
+}
+
+input, select {
+    padding: 3px;
 }
 
 input[type="number"] {
@@ -105,13 +109,13 @@ label:after {
     cursor: pointer;
 }
 
-table {
+.tabela {
     border-collapse: collapse;
     color: rgb(51, 51, 51);
     font-size: 13px;
 }
 
-td, th {
+.tabela td, th {
     border: 1px solid lightgray;
     padding: 10px;
 }

@@ -11,9 +11,9 @@ namespace CodeGolf.Is_it_a_stochastic_matrix
             //int[,] matrix = {{100}};
             //int[,] matrix = {{42}};
             //int[,] matrix = {{100, 0}, {0, 100}};
-            //int[,] matrix = { { 4, 8, 15 }, { 16, 23, 42 }, { 80, 69, 43 } };
+            int[,] matrix = { { 4, 8, 15 }, { 16, 23, 42 }, { 80, 69, 43 } };
             //int[,] matrix = {{99,1}, {2,98} };
-            int[,] matrix = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+            //int[,] matrix = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
 
             Console.WriteLine(F(matrix));
             Console.ReadKey();
@@ -41,13 +41,8 @@ namespace CodeGolf.Is_it_a_stochastic_matrix
                 if (c != 100)
                     w = 0;
             }
-            if (e == 1 && w == 1)
-                return 3;
 
-            if (e == 1)
-                return 1;
-
-            return w == 1 ? 2 : 4;
+            return e == 1 && w == 1 ? 3 : e == 1 ? 1 : w == 1 ? 2 : 4;
         }
     }
 }

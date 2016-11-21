@@ -83,7 +83,7 @@ namespace Kdsh.Zamówienia.Controllers
                 }
             }
 
-            return RedirectToAction("Index");
+            return Index();
         }
 
         [HttpGet]

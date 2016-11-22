@@ -21,16 +21,18 @@ namespace CodeGolf.Make_a__Ceeeeeeee__program
 
         private static IEnumerable<string> F(string s, char c)
         {
-            int i = 1;
+            int i = 1, l;
 
             for (;;)
             {
                 yield return s;
 
-                while (i < s.Length && s[i] == c)
+                l = s.Length;
+
+                while (i < l && s[i] == c)
                     i++;
 
-                if (i == s.Length)
+                if (i == l)
                     break;
 
                 s = s.Remove(i, 1);

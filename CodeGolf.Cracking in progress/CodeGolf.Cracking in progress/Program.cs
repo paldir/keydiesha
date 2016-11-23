@@ -16,9 +16,7 @@ namespace CodeGolf.Cracking_in_progress
         private static void F(string s)
         {
             int l = s.Length, t = 0;
-            var w = new Stopwatch();
-
-            w.Start();
+            var w = Stopwatch.StartNew();
 
             do
             {
